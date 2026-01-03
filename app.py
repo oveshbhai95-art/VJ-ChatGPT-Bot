@@ -3,12 +3,14 @@ from pyrogram import Client
 import os
 from config import API_ID, API_HASH, BOT_TOKEN
 
+# 1. Flask Setup
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
     return 'TechVJ ChatGPT Bot is Live!'
 
+# 2. Pyrogram Setup
 bot = Client(
     "techvj_bot",
     api_id=API_ID,
@@ -18,13 +20,10 @@ bot = Client(
 )
 
 if __name__ == "__main__":
-    # Bot start karein
+    # Bot ko start karein
     bot.start()
     print("Bot Started!")
 
-    # Render ke liye port aur host set karna zaruri hai
-    # Port Render automatically provide karta hai environment variable mein
+    # RENDER FIX: Host '0.0.0.0' aur Port '10000' hona zaruri hai
     port = int(os.environ.get("PORT", 10000))
-    
-    # host="0.0.0.0" hona bahut zaruri hai Render ke liye
     app.run(host="0.0.0.0", port=port)
